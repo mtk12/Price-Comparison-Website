@@ -32,11 +32,12 @@ ans = {}
 
 app = Flask(__name__)
 
-connection = pym.MongoClient()
-db = connection.test
-User_details = db["User_details"]
-User_Products = db["User_Products"]
-Products = db["Products"]
+connection = pym.MongoClient('mongodb+srv://mtk12:audionic1234@cluster0-1msja.mongodb.net/test?retryWrites=true&w=majority')
+db = connection.get_database('test')
+
+User_details = pym.collection.Collection(db, 'User_details')
+User_Products = pym.collection.Collection(db, 'User_Products')
+Products = pym.collection.Collection(db, 'Products')
 
 
 #def sendMail():
