@@ -17,11 +17,13 @@ def getURL(title,driver):
 def daraz(driver,query):
     st = time.time()
     driver.get("https://www.daraz.pk/catalog/?q=" + query + "&_keyori=ss&from=input&spm=a2a0e.searchlistcategory.search.go.520348d9CdM2Wk")
-    y = 100
-    for timer in range(0,3):
-         driver.execute_script("window.scrollTo(0, "+str(y)+")")
-         y += 100 
-         time.sleep(1)
+#    y = 100
+#    for timer in range(0,3):
+#         driver.execute_script("window.scrollTo(0, "+str(y)+")")
+#         y += 100 
+#         time.sleep(1)
+    if(driver.page_source != ""):
+        print("hello")
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 

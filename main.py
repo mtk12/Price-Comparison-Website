@@ -108,86 +108,82 @@ def index():
 
 @app.route('/query', methods=['POST'])
 def upload():
-#    global ans
-#    products = User_Products
-#
-#    if request.method == 'POST':
-#        if request.form.get('Do_something'):
-#            pro = request.form.get('Do_something')
-#            pro = pro.split("  ")
-#            for i in pro:
-#                print(i)
-#            
-#            user_id = products.insert_one(
-#            {   "email" : session["username"],
-#                "product_name" : pro[0],
-#                "price" : pro[1],
-#                "product_link" : pro[2],
-#                "img_link" : pro[3],
-#                "web_img" : pro[4]
-#            })
-#            if user_id:
-#                print("Inserted")
-#            flash('Product added to track', 'success')
-#            return render_template('Result.html',dictionary=ans)
-#        else:
-#            query = request.form['query']
-#            category = request.form['category']
-#            print(query)
-#            print(category)
-#            query = query.lower()
-#            check_product = check_pro(query,category)
-#            
-#            if check_product:
-#                products = Products
-#                pid = products.find({"query":query,"category":category})
-#                
-#                answer = {}
-#                y = {}
-#                for doc in pid:
-#                    y = doc
-#                    key = y["title"]
-#                    answer.setdefault(key,[])
-#                    answer[key].append(y["price"])
-#                    answer[key].append(y["link"])
-#                    answer[key].append(y["image"])
-#                    answer[key].append(y["shop_image"])
-#                           
-#            else:
-#                if(category == "Grocery"):
-#                    df1 = daraz.daraz(driver,query)
-#                    answer = dict(df1)
-#                    answer.update(yayvo.yayvo(driver,query))#daraz.daraz(driver,query)#hummart.hummart(driver,query)
-#                    #print(answer)
-#                elif(category == "Mobile and Tablets" or category == "Laptop and Desktop"):
-#                    df1 = daraz.daraz(driver,query)
-#                    answer = dict(df1)
-#                    answer.update(yayvo.yayvo(driver,query))
-#                    answer.update(goto.goto(driver,query))
-#                    answer.update(ishopping.ishopping(driver,query))
-#                    answer.update(mega.mega(driver,query))
-#                    answer.update(rocket.rocket(driver,query))
-#                    answer.update(itshop.itshop(driver,query))
-#                    answer.update(symbios.symbios(driver,query))
-#                else:
-#                    #answer.update(shophive.shophive(driver,query))
-#                    df1 = daraz.daraz(driver,query)
-#                    answer = dict(df1)
-#                    answer.update(rocket.rocket(driver,query))
-#                    answer.update(yayvo.yayvo(driver,query))
-#                    answer.update(goto.goto(driver,query))
-#                    answer.update(ishopping.ishopping(driver,query))
-#                
-#                store_product(answer,query,category)
-#                
-#            ans = answer
-#            ans = sorted(ans.items(), key=lambda e: e[1][0])
-#            ans = dict(ans)
-    
-            driver.get("https://www.google.com/")
-            print(driver.page_source)
+    global ans
+    products = User_Products
+
+    if request.method == 'POST':
+        if request.form.get('Do_something'):
+            pro = request.form.get('Do_something')
+            pro = pro.split("  ")
+            for i in pro:
+                print(i)
             
-            return render_template('Result.html')
+            user_id = products.insert_one(
+            {   "email" : session["username"],
+                "product_name" : pro[0],
+                "price" : pro[1],
+                "product_link" : pro[2],
+                "img_link" : pro[3],
+                "web_img" : pro[4]
+            })
+            if user_id:
+                print("Inserted")
+            flash('Product added to track', 'success')
+            return render_template('Result.html',dictionary=ans)
+        else:
+            query = request.form['query']
+            category = request.form['category']
+            print(query)
+            print(category)
+            query = query.lower()
+            check_product = check_pro(query,category)
+            
+            if check_product:
+                products = Products
+                pid = products.find({"query":query,"category":category})
+                
+                answer = {}
+                y = {}
+                for doc in pid:
+                    y = doc
+                    key = y["title"]
+                    answer.setdefault(key,[])
+                    answer[key].append(y["price"])
+                    answer[key].append(y["link"])
+                    answer[key].append(y["image"])
+                    answer[key].append(y["shop_image"])
+                           
+            else:
+                if(category == "Grocery"):
+                    df1 = daraz.daraz(driver,query)
+                    answer = dict(df1)
+                    answer.update(yayvo.yayvo(driver,query))#daraz.daraz(driver,query)#hummart.hummart(driver,query)
+                    #print(answer)
+                elif(category == "Mobile and Tablets" or category == "Laptop and Desktop"):
+                    df1 = daraz.daraz(driver,query)
+                    answer = dict(df1)
+                    answer.update(yayvo.yayvo(driver,query))
+                    answer.update(goto.goto(driver,query))
+                    answer.update(ishopping.ishopping(driver,query))
+                    answer.update(mega.mega(driver,query))
+                    answer.update(rocket.rocket(driver,query))
+                    answer.update(itshop.itshop(driver,query))
+                    answer.update(symbios.symbios(driver,query))
+                else:
+                    #answer.update(shophive.shophive(driver,query))
+                    df1 = rocket.rocket(driver,query)#daraz.daraz(driver,query)
+                    answer = dict(df1)
+                    #answer.update(rocket.rocket(driver,query))
+                    #answer.update(yayvo.yayvo(driver,query))
+                    answer.update(goto.goto(driver,query))
+                    answer.update(ishopping.ishopping(driver,query))
+                
+                store_product(answer,query,category)
+                
+            ans = answer
+            ans = sorted(ans.items(), key=lambda e: e[1][0])
+            ans = dict(ans)
+            return render_template('Result.html',dictionary=ans)
 
 def check_pro(query,category):
     products = Products
