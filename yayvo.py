@@ -3,6 +3,8 @@ import time
 from bs4 import BeautifulSoup
 import re
 from webdriver_manager.chrome import ChromeDriverManager
+from requests import get
+
 
 #
 #option = webdriver.ChromeOptions()
@@ -11,42 +13,37 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 def yayvo(driver,query):
     st =time.time()
-    driver.get("https://yayvo.com/search/result/?q=" + query)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    url = "https://yayvo.com/search/result/?q=" + query
+
+    response = get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')    
     
     title_links_img = soup.find_all('li',{'class',"item"})
-    pricing = soup.find_all('div',{'class',"price-box"})
+    
+    prices = soup.find_all('div',{'class',"price-box"})
     
     links = []
     title = []
     price = []
     images = []
-    
+            
+    for elem in prices:
+        try:
+            pri = elem.find('span',{'class','regular-price'})
+        except:
+            pri = elem.find('p',{'class','special-price'})
+            
+        if pri == None:
+            pri = elem.find('p',{'class','special-price'})
+        pr = pri.text
+        pr = re.sub("[^0-9]",'', pr)
+        price.append(int(pr))
+                
     for elem in title_links_img:
         links.append(elem.find('a')['href'])
         title.append(elem.find('a')['title'])
         images.append(elem.find('img')['src'])
         
-    for element in pricing:
-        x = element.find('p',{'class','special-price'})
-        if isinstance(x, type(None)): 
-            a = element.find('span',{'class','regular-price'})
-            y = a.find('span',{'class','price'})
-            pr = y.text
-            pr = re.sub("[^0-9]",'', pr)
-            price.append(int(pr))
-            #price.append(y.text)
-        else:
-            y = x.find('span',{'class','price'})
-            pr = y.text
-            pr = re.sub("[^0-9]",'', pr)
-            price.append(int(pr))
-            #price.append(y.text)
-            
-    links = links[0:10]
-    title = title[0:10]
-    price = price[0:10]
-    images = images[0:10]
     data = {}
     
     for i in range(0,len(title)):

@@ -2,6 +2,7 @@ from selenium import webdriver
 import time
 from bs4 import BeautifulSoup
 from requests import get
+import re
 
 #
 #option = webdriver.ChromeOptions()
@@ -28,7 +29,9 @@ def hummart(query):
     images = []
         
     for elem in prices:
-        price.append(elem.text)
+        pr = elem.text
+        pr = re.sub("[^0-9]",'', pr)
+        price.append(pr)
         
     price = list(set(price))
     

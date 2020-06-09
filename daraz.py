@@ -3,6 +3,7 @@ import time
 from bs4 import BeautifulSoup
 import re
 from webdriver_manager.chrome import ChromeDriverManager
+from requests import get
 
 #option = webdriver.ChromeOptions()
 ##option.add_argument('headless')
@@ -11,66 +12,57 @@ from webdriver_manager.chrome import ChromeDriverManager
 #option = webdriver.ChromeOptions()
 ##option.add_argument('headless')
 #driver = webdriver.Chrome(ChromeDriverManager().install(),options=option)
-
-def getURL(title,driver):
-    driver.get("https://www.google.com/search?q=" + title + "&tbm=isch&ved=2ahUKEwiltfnniqzoAhVH-RQKHWu-A3gQ2-cCegQIABAA&oq=mobile&gs_l=img.3..0l10.93027.93833..94091...0.0..0.245.1165.0j5j1......0....1..gws-wiz-img.......35i39j0i67j0i131.DkxtywiuK4Y&ei=0k12XqWEM8fyU-v8jsAH&bih=648&biw=1366")
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    
-    x = soup.find('div', {'class': 'bRMDJf islir'})
-    return (x.find('img')['src'])
-
 def daraz(driver,query):
     st = time.time()
-    driver.get("https://www.daraz.pk/catalog/?q=" + query)# + "&_keyori=ss&from=input&spm=a2a0e.searchlistcategory.search.go.520348d9CdM2Wk")
-#    y = 100
-#    for timer in range(0,3):
-#         driver.execute_script("window.scrollTo(0, "+str(y)+")")
-#         y += 100 
-#         time.sleep(1)
+    url = "https://www.daraz.pk/catalog/?q=" + query
     
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-
-    title_links = soup.find_all('div', {'class': 'c16H9d'})
-    pricing = soup.find_all('span', {'class': 'c13VH6'})
-    img = soup.find_all('div', {'class': 'cRjKsc'})
-
-
-    links = []
+    response = get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    x = soup.prettify()
+        
+    names = re.findall(r'\"name":"(.+?)\"',x)
+    pro_img_Url = re.findall(r'\"productUrl":"(.+?)\","image":"(.+?)\"',x)
+    prices = re.findall(r'\"price":"(.+?)\"',x)
+    
     title = []
     price = []
-    images = []
+    link = []
+    img = []
     
-    for p in pricing:
-        pr = p.text
-        pr = re.sub("[^0-9]",'', pr)
-        price.append(int(pr))
+    for i in prices:
+        v = float(i)
+        price.append(int(v))
+        
+    for i in pro_img_Url:
+        link.append(i[0])
+        img.append(i[1])
+        
     
-    for title_link in title_links:
-        links.append(title_link.find('a')['href'])
-        title.append(title_link.find('a')['title'])
     
-    a = 0
-    for im in img:
-        try:
-            images.append(im.find('img')['src'])
-        except:
-            images.append(getURL(title[a],driver))
-        a = a + 1
-        if a == 20:
-            break
-    links = links[0:20]
-    title = title[0:20]
-    price = price[0:20]
-    print(title_links)
-    data = {}
-    for i in range(0,len(title)):
-        key = title[i]
-        data.setdefault(key,[])
-        data[key].append(price[i])
-        data[key].append(links[i])
-        data[key].append(images[i])
-        data[key].append('https://laz-img-cdn.alicdn.com/images/ims-web/TB1F29NfwZC2uNjSZFnXXaxZpXa.png')
+    for i in names:
+        t = i.split()
+        if len(t)>1:
+            title.append(i)
     
+    if len(title) < len(price):
+        data = {}
+        for i in range(0,len(title)):
+            key = title[i]
+            data.setdefault(key,[])
+            data[key].append(price[i])
+            data[key].append(link[i])
+            data[key].append(img[i])
+            data[key].append('https://laz-img-cdn.alicdn.com/images/ims-web/TB1F29NfwZC2uNjSZFnXXaxZpXa.png')
+    else:
+        data = {}
+        for i in range(0,len(price)):
+            key = title[i]
+            data.setdefault(key,[])
+            data[key].append(price[i])
+            data[key].append(link[i])
+            data[key].append(img[i])
+            data[key].append('https://laz-img-cdn.alicdn.com/images/ims-web/TB1F29NfwZC2uNjSZFnXXaxZpXa.png')
+        
     end = time.time()
     t = end - st
     print(t)
