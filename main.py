@@ -14,28 +14,28 @@ import rocket
 import symbios
 import hummart
 import goto
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+#from selenium import webdriver
+#from webdriver_manager.chrome import ChromeDriverManager
 from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
 import smtplib
 import os, signal
 
-GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
-CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+#GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+#CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+##chrome_options = webdriver.ChromeOptions()
+##chrome_options.add_argument('--disable-gpu')
+##chrome_options.add_argument('--no-sandbox')
+##chrome_options.binary_location = GOOGLE_CHROME_PATH
+##driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+#
 #chrome_options = webdriver.ChromeOptions()
-#chrome_options.add_argument('--disable-gpu')
-#chrome_options.add_argument('--no-sandbox')
-#chrome_options.binary_location = GOOGLE_CHROME_PATH
-#driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
-
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("headless")
-chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+#chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+#chrome_options.add_argument("headless")
+#chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36")
+#chrome_options.add_argument("--disable-dev-shm-usage")
+#chrome_options.add_argument("--no-sandbox")
+#driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 #option = webdriver.ChromeOptions()
 #option.add_argument('headless')
