@@ -200,7 +200,10 @@ def store_product(products,query,category):
     store = Products
     x = len(products)/2
     
-    for i in products[0:x]:
+    for i in products:
+        if x < 0:
+            break
+        x = x - 1
        uid =  store.insert_one({
                 "query" : query,
                 "category" : category,
@@ -210,6 +213,8 @@ def store_product(products,query,category):
                 "image" : products[i][2],
                 "shop_image" : products[i][3]
                 })
+        
+        
     
     
     
