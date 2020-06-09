@@ -184,7 +184,7 @@ def upload():
 #            ans = sorted(ans.items(), key=lambda e: e[1][0])
 #            ans = dict(ans)
     
-            driver.get("www.google.com")
+            driver.get("https://www.google.com/")
             print(driver.page_source)
             
             return render_template('Result.html')
