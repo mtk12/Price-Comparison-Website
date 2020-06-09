@@ -1,51 +1,63 @@
 from selenium import webdriver
 import time
 from bs4 import BeautifulSoup
+from requests import get
+
 #
 #option = webdriver.ChromeOptions()
 ##option.add_argument('headless')
 #driver = webdriver.Chrome('C:\ChromeDriver\chromedriver.exe',options=option)
 
-def hummart(driver,query):
+def hummart(query):
     st = time.time()
-    driver.get("https://hummart.com/catalogsearch/result/?q=" + query)
+    url = "https://hummart.com/catalogsearch/result/?q=" + query
 
-    titles = driver.find_elements_by_class_name("result-title")
-    links = driver.find_elements_by_class_name("result-content")
-    pricing = driver.find_elements_by_class_name("price-wrapper-inner")
-    images = driver.find_elements_by_class_name("result-thumbnail")
+#    titles = driver.find_elements_by_class_name("result-title")
+#    links = driver.find_elements_by_class_name("result-content")
+#    pricing = driver.find_elements_by_class_name("price-wrapper-inner")
+#    images = driver.find_elements_by_class_name("result-thumbnail")
     
-    link = []
+    response = get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    title_links_img = soup.find_all('div',{'class',"product-item-photo"})
+    prices = soup.find_all('span',{'class',"price"})
+    links = []
     title = []
     price = []
-    image = []
-    
-    for elem in titles:
-        title.append(elem.text)
-          
-    for elem in links:
-          x = elem.find_element_by_tag_name('a')
-          link.append(x.get_property('href'))
-    
-    for elem in images:
-          x = elem.find_element_by_tag_name('img')
-          image.append(x.get_property('src'))
-          
-    for elem in pricing:
-        x = elem.find_element_by_class_name('after_special')
+    images = []
+        
+    for elem in prices:
         price.append(elem.text)
+        
+    price = list(set(price))
     
-    y = filter(lambda x: x != "", price)
-    price = list(y)
+    for elem in title_links_img:
+            links.append(elem.find('a')['href'])
+            title.append(elem.find('img')['alt'])
+            images.append(elem.find('img')['src'])
     
-    data = {}
-    for i in range(0,len(title)):
-        key = title[i]
-        data.setdefault(key,[])
-        data[key].append(price[i])
-        data[key].append(link[i])
-        data[key].append(image[i])
-        data[key].append('https://hummart.com/media/logo/websites/1/Hum_Mart_Logo_final_low_size.png')
+    title = list(set(title))
+    
+    if len(title) > len(price):
+        data = {}
+        for i in range(0,len(price)):
+            key = title[i]
+            data.setdefault(key,[])
+            data[key].append(price[i])
+            data[key].append(links[i])
+            data[key].append(images[i])
+            data[key].append('https://hummart.com/media/logo/websites/1/Hum_Mart_Logo_final_low_size.png')
+    else:
+        data = {}
+        for i in range(0,len(title)):
+            key = title[i]
+            data.setdefault(key,[])
+            data[key].append(price[i])
+            data[key].append(links[i])
+            data[key].append(images[i])
+            data[key].append('https://hummart.com/media/logo/websites/1/Hum_Mart_Logo_final_low_size.png')
+            
     end = time.time() - st
     print(end)
     return data

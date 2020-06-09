@@ -58,12 +58,12 @@ def daraz(driver,query):
         a = a + 1
         if a == 20:
             break
-#    links = links[]
-#    title = title[]
-#    price = price[]
+    links = links[0:20]
+    title = title[0:20]
+    price = price[0:20]
     print(title_links)
     data = {}
-    for i in range(0,20):
+    for i in range(0,len(title)):
         key = title[i]
         data.setdefault(key,[])
         data[key].append(price[i])

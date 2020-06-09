@@ -42,8 +42,9 @@ def rocket(driver,query):
         pr = re.sub("[^0-9]",'', pr)
         price.append(int(pr))
     
-    price.pop()
-    price.pop(0)
+    if len(price) > 2:
+        price.pop()
+        price.pop(0)
         
     title = title[0:20]
     links = links[0:20]

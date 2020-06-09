@@ -12,7 +12,7 @@ import mega
 import itshop
 import rocket
 import symbios
-#import hummart
+import hummart
 import goto
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -155,10 +155,12 @@ def upload():
                            
             else:
                 if(category == "Grocery"):
-                    df1 = daraz.daraz(driver,query)
-                    answer = dict(df1)
-                    answer.update(yayvo.yayvo(driver,query))#daraz.daraz(driver,query)#hummart.hummart(driver,query)
+                    #df1 = daraz.daraz(driver,query)
+                    answer = hummart.hummart(query)
+                    #answer.update(yayvo.yayvo(driver,query))#daraz.daraz(driver,query)
+                    #answer.update(hummart.hummart(query))
                     #print(answer)
+                    
                 elif(category == "Mobile and Tablets" or category == "Laptop and Desktop"):
                     df1 = daraz.daraz(driver,query)
                     answer = dict(df1)
