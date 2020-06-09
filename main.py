@@ -165,7 +165,7 @@ def upload():
                     answer = dict(df1)
                     answer.update(yayvo.yayvo(driver,query))
                     answer.update(goto.goto(driver,query))
-                    answer.update(ishopping.ishopping(driver,query))
+                    #answer.update(ishopping.ishopping(driver,query))
                     answer.update(mega.mega(driver,query))
                     answer.update(rocket.rocket(driver,query))
                     answer.update(itshop.itshop(driver,query))
@@ -177,7 +177,7 @@ def upload():
                     answer.update(rocket.rocket(driver,query))
                     answer.update(yayvo.yayvo(driver,query))
                     answer.update(goto.goto(driver,query))
-                    answer.update(ishopping.ishopping(driver,query))
+                    #answer.update(ishopping.ishopping(driver,query))
                 
                 store_product(answer,query,category)
                 
