@@ -2,6 +2,8 @@ from selenium import webdriver
 import time
 from bs4 import BeautifulSoup
 import re
+from requests import get
+
 #option = webdriver.ChromeOptions()
 #
 ##option.add_argument('headless')
@@ -9,32 +11,30 @@ import re
 
 def goto(driver,query):
     st = time.time()
-    driver.get("https://www.goto.com.pk/catalog-search/filter/q/" + query)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    url = "https://www.goto.com.pk/catalog-search/filter/q/" + query
+
+    response = get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    title_links_img = soup.find_all('div',{'class',"product-image"})
     
-    title_links_img = soup.find_all('div',{'class',"product-image preloader"})
-    pricing = soup.find_all('div',{'class',"price-box"})
+    prices = soup.find_all('span',{'class',"regular-price"})
     
     links = []
     title = []
     price = []
     images = []
-    
+            
+    for elem in prices:
+        pr = elem.text
+        pr = re.sub("[^0-9]",'', pr)
+        price.append(int(pr))
+                
     for elem in title_links_img:
         links.append(elem.find('a')['href'])
-        title.append(elem.find('a')['title'])
-        images.append(elem.find('img')['src'])
-          
-    for elem in pricing:
-          x = elem.find('span',{'class','price'})
-          pr = x.text
-          pr = re.sub("[^0-9]",'', pr)
-          price.append(int(pr))
-          #price.append(pr)
-          
-    links = links[0:20]
-    title = title[0:20]
-    price = price[0:20]
+        title.append(elem.find('img')['alt'])
+        images.append(elem.find('img')['data-src'])
+        
     data = {}
     for i in range(0,len(title)):
         key = title[i]

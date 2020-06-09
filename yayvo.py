@@ -42,7 +42,7 @@ def yayvo(driver,query):
     for elem in title_links_img:
         links.append(elem.find('a')['href'])
         title.append(elem.find('a')['title'])
-        images.append(elem.find('img')['src'])
+        images.append(elem.find('img')['data-src'])
         
     data = {}
     

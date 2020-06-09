@@ -32,7 +32,7 @@ def rocket(driver,query):
     for elem in title_links_img:
         links.append(elem.find('a')['href'])
         title.append(elem.find('img')['alt'])
-        images.append(elem.find('img')['src'])
+        images.append(elem.find('img')['data-original'])
     
     data = {}
     for i in range(0,len(title)):
