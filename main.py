@@ -247,7 +247,7 @@ def register():
         flash('You are now registered and can log in', 'success')
 
         redirect(url_for('login'))
-        return render_template('Login.html') 
+        #return render_template('Login.html') 
     return render_template('Register.html', form=form)
 
 # User login

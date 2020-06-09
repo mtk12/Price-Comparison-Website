@@ -37,7 +37,7 @@ def daraz(driver,query):
         link.append(i[0])
         img.append(i[1])
         
-    
+    print(title)
     
     for i in names:
         t = i.split()
