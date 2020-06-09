@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/m5.css') }}" type = "text/css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/d9331f4d8a.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    body{background:#f2f2f2;}
+    .bg-blue {background:#15151e;}
+    .btn-danger {background:#ff4f1e;color:#fff!important;}
+    .btn-danger:hover {background:#fff;color:#ff4f1e!important;}
+    
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        color: #dd0000;
+        background-color: #f2f2f2;
+        
+        font-weight: bold;
+    }
+    .nav-tabs .nav-link {
+        border-bottom: 1px solid #dd0000;
+        color: #696969;
+       
+    }</style>
+
+<body class="bg-blue">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+		    text
+		</div>
+	</div>
+</div>
+<nav class="navbar navbar-expand-sm bg-light fixed-top navbar-light ">
+  <div class="container">
+    <div class="w3-left" style="float: left;">
+        <a href="/" style='margin-right:16px'>
+          <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" style="width:50px;">
+        </a>
+        <button class="w3-black w3-button"><a href="/">Home</a></button>
+      </div>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <div class="bg-light">
+             <div class="row">
+                <form action="{{ url_for('upload') }}" method="POST" class="searchbar">
+                    <div class="row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control search-slt search_input" placeholder="Enter anything to search" name="query"/>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control search-slt" id="exampleFormControlSelect1" name="category">
+                        <option>Select Category</option>
+                        <option>Mobile and Tablets</option>
+                        <option>Laptop and Desktop</option>
+                        <option>TV and Audio</option>
+                        <option>Home appliances and Electronics</option>
+                        <option>Female Fashion</option>
+                        <option>Male Fashion</option>
+                        <option>Beauty and Health</option>
+                        <option>Home and Living</option>
+                        <option>Gifts</option>
+                        <option>Sports and Travel</option>
+                        <option>Fitness</option>
+                        <option>Baby,Toys & Kids</option>
+                        <option>Office Equipments</option>
+                        <option>Automobile</option>
+                        <option>Grocery</option>
+                        <option>Watch</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-danger wrn-btn" style="width: 100%;" onclick="$('#load').show();">Search</button>
+                </div>
+            </div>
+            </form>
+             </div>
+           </div>
+
+          </div>
+        </div>
+    </div>
+</div>
+<div class="w3-right w3-hide-small">
+    {% if session.logged_in %}
+    <button class="w3-black w3-button"><a href="/dashboard">Dashboard</a></button>
+    <button class="w3-black w3-button"><a href="/logout">Logout</a></button>
+    {% else %}
+    <button class="w3-black w3-button"><a href="/register">Register</a></button>
+    <button class="w3-black w3-button"><a href="/login">Login</a></button>
+    {% endif %}
+  </div>
+ </div>
+</nav>
+
+<div class="container w3-padding-32">
+    <br><br>
+    {% include 'includes/_messages.html' %}
+    <div class="row">
+        {% for key, value in dictionary.items() %}
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="{{value[1]}}">
+                        <img class="pic-1" src="{{value[2]}}" style="width:250px">
+                    </a>
+                    <ul class="social">
+                        <li><a href="{{value[1]}}" data-tip="Shop Now"><i class="fa fa-shopping-cart"></i></a></li>
+                        {% if session.logged_in %}
+                        <li><form method="post" action="/query"><button class="w3-black w3-button" type="submit" name="Do_something" value="{{key}}  {{value[0]}}  {{value[1]}}  {{value[2]}}  {{value[3]}}">Track</button></form></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="{{value[1]}}">{{key}}</a></h3>
+                    <div class="price">Rs{{value[0]}}</div>
+                    <img class="w3-center w3-padding" src="{{value[3]}}" style="width: 100px; height: 30px;">
+                    <br>
+                    <br>
+                  </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<footer class="w3-container w3-padding-64 w3-center">  
+    <ul class="list-inline list-unstyled w3-center">
+        <a href="#"><li class="list-inline-item"><i class="fa fa-facebook-square fa-2x text-primary"></i></li> </a>
+        <a href="#"><li class="list-inline-item"><i class="fa fa-twitter-square fa-2x text-info"></i></li> </a>
+        <a href="#"><li class="list-inline-item"><i class="fa fa-youtube-play fa-2x text-danger"></i></i></li> </a>
+        <a href="#"><li class="list-inline-item"><i class="fa fa-google-plus-square fa-2x text-danger"></i></li> </a> 
+    </ul>
+</footer>
+</body>
+</html>

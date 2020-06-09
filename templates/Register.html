@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/reg_cs.css') }}" type = "text/css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/d9331f4d8a.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+    body{background:#f2f2f2;}
+    .bg-blue {background:#15151e;}
+    .btn-danger {background:#ff4f1e;color:#fff!important;}
+    .btn-danger:hover {background:#fff;color:#ff4f1e!important;}
+    
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        color: #dd0000;
+        background-color: #f2f2f2;
+        border-color: transparent transparent #f3f3f3;
+        border-bottom: 3px solid !important;
+        font-weight: bold;
+    }
+    .nav-tabs .nav-link {
+        border-bottom: 1px solid #dd0000;
+        color: #696969;
+       
+    }</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-sm bg-light fixed-top navbar-light ">
+  <div class="container">
+    <div class="w3-left" style="float: left;">
+      <a href="/" style='margin-right:16px'>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" style="width:50px;">
+      </a>
+      <button class="w3-black w3-button"><a href="/">Home</a></button>
+    </div>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <div class="bg-light">
+             <div class="row">
+                <form action="{{ url_for('upload') }}" method="POST" class="searchbar">
+                    <div class="row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control search-slt search_input" placeholder="Enter anything to search" name="query"/>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control search-slt" id="exampleFormControlSelect1" name="category">
+                        <option>Select Category</option>
+                        <option>Mobile and Tablets</option>
+                        <option>Laptop and Desktop</option>
+                        <option>TV and Audio</option>
+                        <option>Home appliances and Electronics</option>
+                        <option>Female Fashion</option>
+                        <option>Male Fashion</option>
+                        <option>Beauty and Health</option>
+                        <option>Home and Living</option>
+                        <option>Gifts</option>
+                        <option>Sports and Travel</option>
+                        <option>Fitness</option>
+                        <option>Baby,Toys & Kids</option>
+                        <option>Office Equipments</option>
+                        <option>Automobile</option>
+                        <option>Grocery</option>
+                        <option>Watch</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-danger wrn-btn" style="width: 100%;" onclick="$('#load').show();">Search</button>
+                </div>
+            </div>
+            </form>
+             </div>
+           </div>
+
+          </div>
+        </div>
+    </div>
+</div>
+<div class="w3-right w3-hide-small">
+  {% if session.logged_in %}
+  <button class="w3-black w3-button"><a href="/dashboard">Dashboard</a></button>
+  <button class="w3-black w3-button"><a href="/logout">Logout</a></button>
+  {% else %}
+  <button class="w3-black w3-button"><a href="/register">Register</a></button>
+  <button class="w3-black w3-button"><a href="/login">Login</a></button>
+  {% endif %}
+</div>
+ </div>
+</nav>
+
+
+  
+<section class="bg-blue pt-5 pb-4">
+    <div class="w3-container w3-padding-32 w3-center" >
+        <div id="logbox">
+            <h1 class="w3-jumbo">Register</h1>
+            <br>
+            {% include 'includes/_messages.html' %}
+            {% from "includes/_formhelpers.html" import render_field %}
+            <form method="POST" action="" class="w3-container">
+              <div class="form-group w3-input w3-round-large">
+                <i class="fa fa-user"></i>{{render_field(form.name, class_="form-control")}}
+              </div>
+              <div class="form-group w3-input w3-round-large">
+                <i class="fa fa-at"></i>{{render_field(form.email, class_="form-control")}}
+              </div>
+              <div class="form-group w3-input w3-round-large">
+                <i class="fa fa-key"></i>{{render_field(form.password, class_="form-control")}}
+              </div>
+              <div class="form-group w3-input w3-round-large">
+                <i class="fa fa-key"></i>{{render_field(form.confirm, class_="form-control")}}
+              </div>
+              <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+            </form>
+        </div>
+    <!--col-md-6-->
+</div>
+</section>
+
+<footer class="w3-container w3-padding-64 w3-center">  
+    <ul class="list-inline list-unstyled w3-center">
+        <a href="#"><li class="list-inline-item"><i class="fa fa-facebook-square fa-2x text-primary"></i></li> </a>
+        <a href="#"><li class="list-inline-item"><i class="fa fa-twitter-square fa-2x text-info"></i></li> </a>
+        <a href="#"><li class="list-inline-item"><i class="fa fa-youtube-play fa-2x text-danger"></i></i></li> </a>
+        <a href="#"><li class="list-inline-item"><i class="fa fa-google-plus-square fa-2x text-danger"></i></li> </a> 
+    </ul>
+</footer>
+
+</body>
+</html>

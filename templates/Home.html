@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/d9331f4d8a.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    body{background:#f2f2f2;}
+    .bg-blue {background:#15151e;}
+    .btn-danger {background:#ff4f1e;color:#fff!important;}
+    .btn-danger:hover {background:#fff;color:#ff4f1e!important;}
+    
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        color: #dd0000;
+        background-color: #f2f2f2;
+        border-color: transparent transparent #f3f3f3;
+        border-bottom: 3px solid !important;
+        font-weight: bold;
+    }
+    .nav-tabs .nav-link {
+        border-bottom: 1px solid #dd0000;
+        color: #696969;
+       
+    }</style>
+<!------ Include the above in your HEAD tag ---------->
+
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+		    text
+		</div>
+	</div>
+</div>
+<nav class="navbar navbar-expand-sm bg-light fixed-top navbar-light ">
+  <div class="container">  
+  <div class="w3-left" style="float: left;">
+    <a href="/" style='margin-right:16px'>
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" style="width:50px;">
+    </a>
+    <button class="w3-black w3-button"><a href="/">Home</a></button>
+  </div>
+  <div class="w3-right w3-hide-small">
+    {% if session.logged_in %}
+    <button class="w3-black w3-button"><a href="/dashboard">Dashboard</a></button>
+    <button class="w3-black w3-button"><a href="/logout">Logout</a></button>
+    {% else %}
+    <button class="w3-black w3-button"><a href="/register">Register</a></button>
+    <button class="w3-black w3-button"><a href="/login">Login</a></button>
+    {% endif %}
+  </div>
+ </div>
+</nav>
+<div class="mt-4"></div>
+
+<section class="bg-blue text-white  pt-5 pb-4">
+    <div class="container py-5">
+	<div class="row">
+		<div class="col-md-6">
+		    <div class="row">
+        		<div class="col-md-12">
+        		    <h1>Find best</h1>
+        		    <h1>Price for any product</h1>
+        		    <p>Get the best price on all stores. Check out the latest products.</p>
+        		</div>
+        	</div>
+        	<div class="row">
+                    <div class="col-md-12">
+                        <div class="tab-content" id="nav-tabContent">
+                          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                              <div class="card bg-light card-body ">
+                             <div class="row">
+                                <form action="{{ url_for('upload') }}" method="POST" class="searchbar">
+                                    <div class="row">
+                        		<div class="col-md-4">
+                                    <input type="text" class="form-control search-slt search_input" placeholder="Enter anything to search" name="query"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control search-slt" id="exampleFormControlSelect1" name="category">
+                                        <option>Select Category</option>
+                                        <option>Mobile and Tablets</option>
+                                        <option>Laptop and Desktop</option>
+                                        <option>TV and Audio</option>
+                                        <option>Home appliances and Electronics</option>
+                                        <option>Female Fashion</option>
+                                        <option>Male Fashion</option>
+                                        <option>Beauty and Health</option>
+                                        <option>Home and Living</option>
+                                        <option>Gifts</option>
+                                        <option>Sports and Travel</option>
+                                        <option>Fitness</option>
+                                        <option>Baby,Toys & Kids</option>
+                                        <option>Office Equipments</option>
+                                        <option>Automobile</option>
+                                        <option>Grocery</option>
+                                        <option>Watch</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-danger wrn-btn" style="width: 100%;" onclick="$('#load').show();">Search</button>
+                                </div>
+                            </div>
+                            </form>
+    	                     </div>
+                           </div>
+
+                          </div>
+                        </div>
+                    </div>
+                </div>
+		</div>
+		<div class="col-md-6">
+		    <img src="{{ url_for('static', filename='home.png') }}">
+		</div>
+	</div>
+</div>
+</section>
+<section class="py-5 featured">
+    <div class="container">
+	<div class="row mb-3">
+		<div class="col-md-12 w3-center">
+		    <h1>Categories</h1>
+		</div>
+	</div>
+	<div class="row">
+            <div class="col-md-12 text-center ">
+                <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-mobile-alt w3-xxlarge" style="color:#15151e"></i><br>Mobile and Tablets</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-laptop w3-xxlarge" style="color:#15151e"></i><br>Laptop and Desktop</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-desktop  w3-xxlarge" style="color:#15151e"></i><br>TV and Audio</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-blender-phone  w3-xxlarge" style="color:#15151e"></i><br>Home appliances and Electronics</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-female  w3-xxlarge" style="color:#15151e"></i><br>Female Fashion</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-tshirt  w3-xxlarge" style="color:#15151e"></i><br>Male Fashion</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-heart  w3-xxlarge" style="color:#15151e"></i><br>Beauty and Health</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-home  w3-xxlarge" style="color:#15151e"></i><br>Home and Living</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-gifts  w3-xxlarge" style="color:#15151e"></i><br>Gifts</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-basketball-ball  w3-xxlarge" style="color:#15151e"></i><br>Sports and Travel</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-dumbbell  w3-xxlarge" style="color:#15151e"></i><br>Fitness</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-baby-carriage  w3-xxlarge" style="color:#15151e"></i><br>Baby,Toys & Kids</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-briefcase  w3-xxlarge" style="color:#15151e"></i><br>Office Equipments</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-car  w3-xxlarge" style="color:#15151e"></i><br>Automobile</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-shopping-bag  w3-xxlarge" style="color:#15151e"></i><br>Grocery</label>
+                  </div>
+                  <div class="w3-col l3 m3 margin-bottom w3-padding-32">
+                    <label><i class="fas fa-clock  w3-xxlarge" style="color:#15151e"></i><br>Watch</label>
+                  </div>
+            </div>
+        </div>
+</div>
+</section>
+
+<section class="py-5 bg-blue text-white">
+    <div class="w3-row-padding w3-center">
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="https://laz-img-cdn.alicdn.com/images/ims-web/TB1F29NfwZC2uNjSZFnXXaxZpXa.png" alt="John" style="width:50%">
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="http://yayvo.com/skin/frontend/default/yayvo_new/images/yayvo_logo.png" alt="Mike" style="width:50%">
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="https://d11zer3aoz69xt.cloudfront.net/skin/frontend/ishopping/default/images/logo.png" alt="Dan" style="width:40%">
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="https://www.itshop.pk/product_images/logo.png" alt="John" style="width:50%">
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="https://www.symbios.pk/assets/symbios-logo.png" alt="Jane" style="width:50%">
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="https://hummart.com/media/logo/websites/1/Hum_Mart_Logo_final_low_size.png" alt="Mike" style="width:50%">
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="https://www.cartright.pk/StoreLogos/11/mega.pk.png" alt="Dan" style="width:50%">
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="https://rocket.pk/pub/media/logo/stores/1/logo-Final.jpeg" alt="Dan" style="width:50%">
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="https://cdn.goto.com.pk/uploads/logo/logo.png" alt="Dan" style="width:30%">
+        </div>
+      </div>
+</section>
+
+<footer class="w3-container w3-padding-64 w3-center">  
+    <ul class="list-inline list-unstyled w3-center">
+        <a href="#"><li class="list-inline-item"><i class="fa fa-facebook-square fa-2x text-primary"></i></li> </a>
+        <a href="#"><li class="list-inline-item"><i class="fa fa-twitter-square fa-2x text-info"></i></li> </a>
+        <a href="#"><li class="list-inline-item"><i class="fa fa-youtube-play fa-2x text-danger"></i></i></li> </a>
+        <a href="#"><li class="list-inline-item"><i class="fa fa-google-plus-square fa-2x text-danger"></i></li> </a> 
+    </ul></footer>
+</body>
+</html>
