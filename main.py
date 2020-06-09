@@ -109,6 +109,7 @@ def index():
 @app.route('/query', methods=['POST'])
 def upload():
     global ans
+    store_product(ans,query,category)
     products = User_Products
 
     if request.method == 'POST':
@@ -179,7 +180,6 @@ def upload():
                     answer.update(goto.goto(driver,query))
                     #answer.update(ishopping.ishopping(driver,query))
                 
-                store_product(answer,query,category)
                 
             ans = answer
             ans = sorted(ans.items(), key=lambda e: e[1][0])
@@ -197,7 +197,9 @@ def check_pro(query,category):
     
 def store_product(products,query,category):
     store = Products
-    for i in products:
+    x = len(products)/2
+    
+    for i in products[0:x]:
        uid =  store.insert_one({
                 "query" : query,
                 "category" : category,

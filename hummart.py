@@ -31,7 +31,7 @@ def hummart(query):
     for elem in prices:
         pr = elem.text
         pr = re.sub("[^0-9]",'', pr)
-        price.append(pr)
+        price.append(int(pr))
         
     price = list(set(price))
     
