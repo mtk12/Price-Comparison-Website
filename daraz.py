@@ -12,7 +12,7 @@ from requests import get
 #option = webdriver.ChromeOptions()
 ##option.add_argument('headless')
 #driver = webdriver.Chrome(ChromeDriverManager().install(),options=option)
-def daraz(driver,query):
+def daraz(query):
     st = time.time()
     url = "https://www.daraz.pk/catalog/?q=" + query
     

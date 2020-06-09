@@ -156,28 +156,28 @@ def upload():
                            
             else:
                 if(category == "Grocery"):
-                    df1 = daraz.daraz(driver,query)
+                    df1 = daraz.daraz(query)
                     answer = dict(df1)
-                    answer.update(yayvo.yayvo(driver,query))#daraz.daraz(driver,query)
+                    answer.update(yayvo.yayvo(query))
                     answer.update(hummart.hummart(query))
                     #print(answer)
                 elif(category == "Mobile and Tablets" or category == "Laptop and Desktop"):
-                    df1 = daraz.daraz(driver,query)
+                    df1 = daraz.daraz(query)
                     answer = dict(df1)
-                    answer.update(yayvo.yayvo(driver,query))
-                    answer.update(goto.goto(driver,query))
+                    answer.update(yayvo.yayvo(query))
+                    answer.update(goto.goto(query))
                     #answer.update(ishopping.ishopping(driver,query))
-                    answer.update(mega.mega(driver,query))
-                    answer.update(rocket.rocket(driver,query))
-                    answer.update(itshop.itshop(driver,query))
-                    answer.update(symbios.symbios(driver,query))
+                    answer.update(mega.mega(query))
+                    answer.update(rocket.rocket(query))
+                    answer.update(itshop.itshop(query))
+                    answer.update(symbios.symbios(query))
                 else:
                     #answer.update(shophive.shophive(driver,query))
-                    df1 = daraz.daraz(driver,query)
+                    df1 = daraz.daraz(query)
                     answer = dict(df1)
-                    answer.update(rocket.rocket(driver,query))
-                    answer.update(yayvo.yayvo(driver,query))
-                    answer.update(goto.goto(driver,query))
+                    answer.update(rocket.rocket(query))
+                    answer.update(yayvo.yayvo(query))
+                    answer.update(goto.goto(query))
                     #answer.update(ishopping.ishopping(driver,query))
                 
                 

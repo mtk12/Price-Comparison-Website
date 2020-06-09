@@ -8,7 +8,7 @@ from requests import get
 #option.add_argument('headless')
 #driver = webdriver.Chrome('C:\ChromeDriver\chromedriver.exe',options=option)
 
-def mega(driver,query):
+def mega(query):
     st = time.time()
     url = "http://www.mega.pk/search/" + query + "/"
 

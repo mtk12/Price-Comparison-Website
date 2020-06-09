@@ -8,7 +8,7 @@ from requests import get
 ##option.add_argument('headless')
 #driver = webdriver.Chrome('C:\ChromeDriver\chromedriver.exe',options=option)
 
-def rocket(driver,query):
+def rocket(query):
     st = time.time()
     url = "https://rocket.pk/catalogsearch/result/?q=" + query
 

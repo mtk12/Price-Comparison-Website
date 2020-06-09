@@ -9,7 +9,7 @@ from requests import get
 ##option.add_argument('headless')
 #driver = webdriver.Chrome('C:\ChromeDriver\chromedriver.exe',options=option)
 
-def goto(driver,query):
+def goto(query):
     st = time.time()
     url = "https://www.goto.com.pk/catalog-search/filter/q/" + query
 

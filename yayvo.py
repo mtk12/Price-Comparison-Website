@@ -11,7 +11,7 @@ from requests import get
 ##option.add_argument('headless')
 #driver = webdriver.Chrome(ChromeDriverManager().install(),options=option)
 
-def yayvo(driver,query):
+def yayvo(query):
     st =time.time()
     url = "https://yayvo.com/search/result/?q=" + query
 

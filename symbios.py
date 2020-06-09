@@ -2,14 +2,18 @@ from selenium import webdriver
 import time
 from bs4 import BeautifulSoup
 import re
+from requests import get
+
 #option = webdriver.ChromeOptions()
 #option.add_argument('headless')
 #driver = webdriver.Chrome('C:\ChromeDriver\chromedriver.exe',options=option)
 
-def symbios(driver,query):
+def symbios(query):
     st = time.time()
-    driver.get("https://www.symbios.pk/search.php?search_query=" + query)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    url = "https://www.symbios.pk/search.php?search_query=" + query
+    
+    response = get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
     
     title_links_img = soup.find_all('div',{'class',"product-image"})
     pricing = soup.find_all('span',{'class',"price"})

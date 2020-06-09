@@ -2,16 +2,20 @@ from selenium import webdriver
 import time
 from bs4 import BeautifulSoup
 import re
+from requests import get
+
 #option = webdriver.ChromeOptions()
 #
 ##option.add_argument('headless')
 #driver = webdriver.Chrome('C:\ChromeDriver\chromedriver.exe',options=option)
 
 
-def itshop(driver,query):
+def itshop(query):
     st = time.time()
-    driver.get("https://www.itshop.pk/search.php?search_query=" + query + "&x=0&y=0")
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    url = "https://www.itshop.pk/search.php?search_query=" + query + "&x=0&y=0"
+    
+    response = get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
     
     title_links = soup.find_all('div',{'class',"ProductDetails"})
     pricing = soup.find_all('span',{'class',"ProductPrice"})
