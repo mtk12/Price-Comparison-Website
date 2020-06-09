@@ -109,7 +109,7 @@ def index():
 @app.route('/query', methods=['POST'])
 def upload():
     global ans
-    store_product(ans,query,category)
+    
     products = User_Products
 
     if request.method == 'POST':
@@ -184,6 +184,7 @@ def upload():
             ans = answer
             ans = sorted(ans.items(), key=lambda e: e[1][0])
             ans = dict(ans)
+            store_product(ans,query,category)
             return render_template('Result.html',dictionary=ans)
 
 def check_pro(query,category):
