@@ -187,7 +187,7 @@ def upload():
             driver.get("www.google.com")
             print(driver.page_source)
             
-            return render_template('Result.html',dictionary=ans)
+            return render_template('Result.html')
 
 def check_pro(query,category):
     products = Products
