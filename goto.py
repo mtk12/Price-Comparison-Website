@@ -36,13 +36,22 @@ def goto(driver,query):
         images.append(elem.find('img')['data-src'])
         
     data = {}
-    for i in range(0,len(title)):
-        key = title[i]
-        data.setdefault(key,[])
-        data[key].append(price[i])
-        data[key].append(links[i])
-        data[key].append(images[i])
-        data[key].append('https://cdn.goto.com.pk/uploads/logo/logo.png')
+    if len(price) < len(title):
+        for i in range(0,len(price)):
+            key = title[i]
+            data.setdefault(key,[])
+            data[key].append(price[i])
+            data[key].append(links[i])
+            data[key].append(images[i])
+            data[key].append('https://cdn.goto.com.pk/uploads/logo/logo.png')
+    else:
+        for i in range(0,len(title)):
+            key = title[i]
+            data.setdefault(key,[])
+            data[key].append(price[i])
+            data[key].append(links[i])
+            data[key].append(images[i])
+            data[key].append('https://cdn.goto.com.pk/uploads/logo/logo.png')
     end = time.time() - st
     print(end)
     return data
