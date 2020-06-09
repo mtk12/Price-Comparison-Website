@@ -56,7 +56,7 @@ def daraz(driver,query):
 #    links = links[]
 #    title = title[]
 #    price = price[]
-            
+    print(title)
     data = {}
     for i in range(0,20):
         key = title[i]
