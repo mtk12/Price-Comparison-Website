@@ -171,9 +171,9 @@ def upload():
                     answer.update(symbios.symbios(driver,query))
                 else:
                     #answer.update(shophive.shophive(driver,query))
-                    df1 = rocket.rocket(driver,query)#daraz.daraz(driver,query)
+                    df1 = daraz.daraz(driver,query)
                     answer = dict(df1)
-                    #answer.update(rocket.rocket(driver,query))
+                    answer.update(rocket.rocket(driver,query))
                     #answer.update(yayvo.yayvo(driver,query))
                     answer.update(goto.goto(driver,query))
                     answer.update(ishopping.ishopping(driver,query))
