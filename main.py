@@ -35,6 +35,7 @@ driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), c
 ans = {}
 
 app = Flask(__name__)
+app.secret_key='secret123'
 
 connection = pym.MongoClient('mongodb+srv://mtk12:audionic1234@cluster0-1msja.mongodb.net/test?retryWrites=true&w=majority')
 db = connection.get_database('test')
@@ -336,6 +337,6 @@ def dashboard():
 #atexit.register(handle_exit)
 
 if __name__ == '__main__':
-    app.secret_key='secret123'
+    
     app.run()
     
