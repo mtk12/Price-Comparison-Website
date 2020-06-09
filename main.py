@@ -204,7 +204,7 @@ def store_product(products,query,category):
         if x < 0:
             break
         x = x - 1
-       uid =  store.insert_one({
+        uid =  store.insert_one({
                 "query" : query,
                 "category" : category,
                 "title" : i,
