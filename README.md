@@ -12,3 +12,18 @@ Templates: Contains all the html templates of the webpages
 Static: Contains the static content like website logo and css files
 Scripts: Contains the scraping scripts of the different websites
 
+<h1>Snippets:<br>
+<br>
+<img src="https://github.com/mtk12/Price-Comparison-Website/blob/master/Screenshots/1.PNG"/>
+<br>
+<br>
+<img src="https://github.com/mtk12/Price-Comparison-Website/blob/master/Screenshots/2.PNG"/>
+ <br>
+<br>
+<img src="https://github.com/mtk12/Price-Comparison-Website/blob/master/Screenshots/3.PNG"/>
+ <br>
+<br>
+<img src="https://github.com/mtk12/Price-Comparison-Website/blob/master/Screenshots/4.PNG"/>
+<br>
+<br>
+<img src="https://github.com/mtk12/Price-Comparison-Website/blob/master/Screenshots/5.PNG"/>
