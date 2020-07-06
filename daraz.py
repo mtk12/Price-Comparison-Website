@@ -1,8 +1,8 @@
-from selenium import webdriver
+#from selenium import webdriver
 import time
 from bs4 import BeautifulSoup
 import re
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 from requests import get
 
 #option = webdriver.ChromeOptions()

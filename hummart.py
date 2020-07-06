@@ -20,7 +20,7 @@ def hummart(query):
     
     response = get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-
+    
     title_links_img = soup.find_all('div',{'class',"product-item-photo"})
     prices = soup.find_all('span',{'class',"price"})
     links = []

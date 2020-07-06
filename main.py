@@ -214,10 +214,7 @@ def store_product(products,query,category):
                 "shop_image" : products[i][3]
                 })
         
-        
-    
-    
-    
+
 # Register Form Class
 class RegisterForm(Form):
     email = StringField('Email', [validators.Length(min=6, max=50)])
