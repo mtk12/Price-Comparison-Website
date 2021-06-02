@@ -156,7 +156,7 @@ simplegeneric==0.8.1
 singledispatch==3.4.0.3
 soupsieve==1.9.3
 unicodecsv==0.14.1
-urllib3==1.24.2
+urllib3==1.26.5
 w3lib==1.21.0
 wasabi==0.6.0
 wcwidth==0.1.7
